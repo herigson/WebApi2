@@ -1,0 +1,30 @@
+[
+  {
+    "Id": 1,
+    "Nome": "Marta",
+    "Sobrenome": "Will",
+    "Telefone": "123456789",
+    "Ra": 1
+  },
+  {
+    "Id": 2,
+    "Nome": "Laura",
+    "Sobrenome": "Isadora",
+    "Telefone": "123456788",
+    "Ra": 2
+  },
+  {
+    "Id": 3,
+    "Nome": "Paula",
+    "Sobrenome": "Santos",
+    "Telefone": "123456787",
+    "Ra": 3
+  },
+  {
+    "Id": 4,
+    "Nome": "Rafael",
+    "Sobrenome": "Henrique",
+    "Telefone": "123456791",
+    "Ra": 4
+  }
+]
