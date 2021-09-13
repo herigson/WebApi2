@@ -14,6 +14,7 @@ namespace WebApi.Models
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
         public string Telefone { get; set; }
+        public string Data { get; set; }
         public int Ra { get; set; }
         public List<Aluno> ListarAlunos()
         {
