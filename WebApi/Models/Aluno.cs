@@ -1,6 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -16,14 +19,20 @@ namespace WebApi.Models
         public string Telefone { get; set; }
         public string Data { get; set; }
         public int Ra { get; set; }
+
+
         public List<Aluno> ListarAlunos()
         {
-            var pathFile = HostingEnvironment.MapPath(@"~/App_Data/Base.json");
-            var json = System.IO.File.ReadAllText(pathFile);
+            try
+            {
+                var alunoDao = new AlunoDAO();
+                return alunoDao.ListarAlunosDB();
+            }
+            catch (Exception ex)
+            {
 
-            var listaAlunos = JsonConvert.DeserializeObject<List<Aluno>>(json);
-
-            return listaAlunos;
+                throw new Exception($"Erro ao listar alunos: Erro => {ex.Message}");
+            }
         }
 
         public bool ReescreverArquivo(List<Aluno> listaAlunos)
@@ -35,47 +44,60 @@ namespace WebApi.Models
             return true;
         }
 
-        public Aluno Inserir(Aluno aluno)
+        public void Inserir(Aluno aluno)
         {
-            var listaAlunos = this.ListarAlunos();
-            var maxId = listaAlunos.Max(aln => aln.Id);
-            aluno.Id = maxId + 1;
-            listaAlunos.Add(aluno);
-
-            ReescreverArquivo(listaAlunos);
-
-            return aluno;
-        }
-
-        public Aluno Atualizar(int id, Aluno aluno)
-        {
-            var listaAlunos = this.ListarAlunos();
-
-            var itemIndex = listaAlunos.FindIndex(a => a.Id == aluno.Id);
-            if (itemIndex >= 0)
+            try
             {
-                aluno.Id = id;
-                listaAlunos[itemIndex] = aluno;
+                var alunoDao = new AlunoDAO();
+                alunoDao.InserirAlunoDB(aluno);
             }
-            else
-                return null;
-            ReescreverArquivo(listaAlunos);
+            catch (Exception ex )
+            {
 
-            return aluno;
+                throw new Exception($"Erro ao inserir aluno: Erro => {ex.Message}");
+            }
         }
 
-        public bool Deletar(int id)
+        public void Atualizar( Aluno aluno)
         {
-            var listaAlunos = this.ListarAlunos();
-            var itemIndex = listaAlunos.FindIndex(a => a.Id == id);
+            //var listaAlunos = this.ListarAlunos();
 
-            if (itemIndex >= 0)
-                listaAlunos.RemoveAt(itemIndex);
-            else
-                return false;
+            //var itemIndex = listaAlunos.FindIndex(a => a.Id == aluno.Id);
+            //if (itemIndex >= 0)
+            //{
+            //    aluno.Id = id;
+            //    listaAlunos[itemIndex] = aluno;
+            //}
+            //else
+            //    return null;
+            //ReescreverArquivo(listaAlunos);
 
-            ReescreverArquivo(listaAlunos);
-            return true;
+            //return aluno;
+
+            try
+            {
+                var alunoDao = new AlunoDAO();
+                alunoDao.AtualizarAlunoDB(aluno);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception($"Erro ao atualizar aluno: Erro => {ex.Message}");
+            }
+        }
+
+        public void Deletar(int id)
+        {
+            try
+            {
+                var alunoDao = new AlunoDAO();
+                alunoDao.DeletarAlunoDb(id);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception($"Erro ao deletar aluno: Erro => {ex.Message}");
+            }
         }
     }
 }
