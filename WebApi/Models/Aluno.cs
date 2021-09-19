@@ -21,12 +21,12 @@ namespace WebApi.Models
         public int Ra { get; set; }
 
 
-        public List<Aluno> ListarAlunos()
+        public List<Aluno> ListarAlunos(int? id = null)
         {
             try
             {
                 var alunoDao = new AlunoDAO();
-                return alunoDao.ListarAlunosDB();
+                return alunoDao.ListarAlunosDB(id);
             }
             catch (Exception ex)
             {
@@ -60,20 +60,7 @@ namespace WebApi.Models
 
         public void Atualizar( Aluno aluno)
         {
-            //var listaAlunos = this.ListarAlunos();
-
-            //var itemIndex = listaAlunos.FindIndex(a => a.Id == aluno.Id);
-            //if (itemIndex >= 0)
-            //{
-            //    aluno.Id = id;
-            //    listaAlunos[itemIndex] = aluno;
-            //}
-            //else
-            //    return null;
-            //ReescreverArquivo(listaAlunos);
-
-            //return aluno;
-
+ 
             try
             {
                 var alunoDao = new AlunoDAO();
