@@ -11,17 +11,10 @@ using System.Web.Hosting;
 
 namespace WebApi.Models
 {
-    public class Aluno
+    public class AlunoModel
     {
-        public int Id { get; set; }
-        public string Nome { get; set; }
-        public string Sobrenome { get; set; }
-        public string Telefone { get; set; }
-        public string Data { get; set; }
-        public int Ra { get; set; }
 
-
-        public List<Aluno> ListarAlunos(int? id = null)
+        public List<AlunoDTO> ListarAlunos(int? id = null)
         {
             try
             {
@@ -35,16 +28,7 @@ namespace WebApi.Models
             }
         }
 
-        public bool ReescreverArquivo(List<Aluno> listaAlunos)
-        {
-            var pathFile = HostingEnvironment.MapPath(@"~/App_Data/Base.json");
-            var json = JsonConvert.SerializeObject(listaAlunos, Formatting.Indented);
-            File.WriteAllText(pathFile, json);
-
-            return true;
-        }
-
-        public void Inserir(Aluno aluno)
+        public void Inserir(AlunoDTO aluno)
         {
             try
             {
@@ -58,7 +42,7 @@ namespace WebApi.Models
             }
         }
 
-        public void Atualizar( Aluno aluno)
+        public void Atualizar(AlunoDTO aluno)
         {
  
             try

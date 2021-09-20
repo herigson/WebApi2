@@ -20,7 +20,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                Aluno aluno = new Aluno();
+                AlunoModel aluno = new AlunoModel();
 
                 return Ok(aluno.ListarAlunos());
             }
@@ -34,20 +34,29 @@ namespace WebApi.Controllers
         [HttpGet]
         [Route("Recuperar/{id:int}")]
         // GET: api/Aluno/5
-        public Aluno Get(int? id)
+        public IHttpActionResult RecuperarPorId(int? id)
         {
-            Aluno aluno = new Aluno();
-
-            return aluno.ListarAlunos(id).FirstOrDefault();
+            try
+            {
+                AlunoModel aluno = new AlunoModel();
+                return Ok(aluno.ListarAlunos(id).FirstOrDefault());
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+                throw;
+            }
+            
         }
+
         [HttpGet]
         [Route(@"RecuperarPorDataNome/{data:regex([0-9]{4}\-[0-9]{2})}/{nome:minlength(5)}")]
         public IHttpActionResult Recuperar(string data, string nome)
         {
             try
             {
-                Aluno aluno = new Aluno();
-                IEnumerable<Aluno> alunos = aluno.ListarAlunos().Where(x => x.Nome == nome || x.Data == data);
+                AlunoModel aluno = new AlunoModel();
+                IEnumerable<AlunoDTO> alunos = aluno.ListarAlunos().Where(x => x.Nome == nome || x.Data == data);
 
                 if (!alunos.Any())
                     return NotFound();
@@ -56,18 +65,19 @@ namespace WebApi.Controllers
             }
             catch (Exception ex)
             {
-
                 return InternalServerError(ex);
             }
 
         }
 
         [HttpPost]
-        public IHttpActionResult Post(Aluno aluno)
+        public IHttpActionResult Post(AlunoDTO aluno)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             try
             {
-                Aluno _aluno = new Aluno();
+                AlunoModel _aluno = new AlunoModel();
 
                 _aluno.Inserir(aluno);
 
@@ -82,11 +92,11 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public IHttpActionResult Put(int id, [FromBody] Aluno aluno)
+        public IHttpActionResult Put(int id, [FromBody] AlunoDTO aluno)
         {
             try
             {
-                Aluno _aluno = new Aluno();
+                AlunoModel _aluno = new AlunoModel();
                 aluno.Id = id;
 
                 _aluno.Atualizar(aluno);
@@ -104,7 +114,7 @@ namespace WebApi.Controllers
         {
             try
             {
-                Aluno _aluno = new Aluno();
+                AlunoModel _aluno = new AlunoModel();
                 _aluno.Deletar(id);
                 return Ok("Deletado com sucesso");
             }

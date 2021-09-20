@@ -22,9 +22,9 @@ namespace WebApi.Models
 
         }
 
-        public List<Aluno> ListarAlunosDB(int? id)
+        public List<AlunoDTO> ListarAlunosDB(int? id)
         {
-            var listaAlunos = new List<Aluno>();
+            var listaAlunos = new List<AlunoDTO>();
             try
             {
                 IDbCommand selectCmd = conexao.CreateCommand();
@@ -37,7 +37,7 @@ namespace WebApi.Models
                 IDataReader resultado = selectCmd.ExecuteReader();
                 while (resultado.Read())
                 {
-                    var aluno = new Aluno()
+                    var aluno = new AlunoDTO()
                     {
                         Id = Convert.ToInt32(resultado["Id"]),
                         Nome = resultado["nome"].ToString(),
@@ -61,7 +61,7 @@ namespace WebApi.Models
             }
         }
 
-        public void InserirAlunoDB(Aluno aluno)
+        public void InserirAlunoDB(AlunoDTO aluno)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace WebApi.Models
             }
         }
 
-        public void AtualizarAlunoDB(Aluno aluno)
+        public void AtualizarAlunoDB(AlunoDTO aluno)
         {
             try
             {
