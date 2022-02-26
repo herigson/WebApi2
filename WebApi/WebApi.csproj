@@ -121,6 +121,20 @@
     <Content Include="App_Data\Database_log.ldf">
       <DependentUpon>Database.mdf</DependentUpon>
     </Content>
+    <Content Include="Front\css\bootstrap-theme.css" />
+    <Content Include="Front\css\bootstrap-theme.min.css" />
+    <Content Include="Front\css\bootstrap.css" />
+    <Content Include="Front\css\bootstrap.min.css" />
+    <Content Include="Front\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Front\index.html" />
+    <Content Include="Front\js\bootbox.min.js" />
+    <Content Include="Front\js\bootstrap.js" />
+    <Content Include="Front\js\bootstrap.min.js" />
+    <Content Include="Front\js\npm.js" />
+    <Content Include="Front\login.html" />
+    <Content Include="Front\scripts\script.js" />
+    <Content Include="Front\styles\login.css" />
+    <Content Include="Front\styles\style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +149,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Base.json" />
+    <Content Include="Front\css\bootstrap-theme.css.map" />
+    <Content Include="Front\css\bootstrap-theme.min.css.map" />
+    <Content Include="Front\css\bootstrap.css.map" />
+    <Content Include="Front\css\bootstrap.min.css.map" />
+    <Content Include="Front\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Front\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Front\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Front\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
